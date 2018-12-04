@@ -10,19 +10,23 @@ dist: xenial
 
 compiler: gcc
 
+# Requirements to install vcpkg:
+addons:
+  apt:
+    sources: ubuntu-toolchain-r-test
+    packages: g++-8
+
 matrix:
   include:
   - name: GCC
     addons:
       apt:
-        sources: ubuntu-toolchain-r-test
         packages: g++-7
 
 before_install:
-- mkdir tools || cd ./tools
+- ls && mkdir tools && cd ./tools
 - git clone --depth=1 --quiet https://github.com/Microsoft/vcpkg.git
 - cd vcpkg
-- ls -al
 - eval "CC=gcc-7 && CXX=g++-7"
 - ./bootstrap-vcpkg.sh
 - ./vcpkg integrate install
