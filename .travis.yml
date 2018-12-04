@@ -23,6 +23,7 @@ before_install:
 - git clone --depth=1 --quiet https://github.com/Microsoft/vcpkg.git
 - cd vcpkg
 - ls -al
+- eval "CC=gcc-7 && CXX=g++-7"
 - ./bootstrap-vcpkg.sh
 - ./vcpkg integrate install
 
