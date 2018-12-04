@@ -10,17 +10,12 @@ dist: xenial
 
 compiler: gcc
 
-# Requirements to install vcpkg:
-addons:
-  apt:
-    sources: ubuntu-toolchain-r-test
-    packages: g++-8
-
 matrix:
   include:
   - name: GCC
     addons:
       apt:
+        sources: ubuntu-toolchain-r-test
         packages: g++-7
 
 before_install:
@@ -32,7 +27,7 @@ before_install:
 - ./vcpkg integrate install
 
 install:
-# install dependencies
+# dependencies
 - ./vcpkg install ms-gsl
 - ./vcpkg install gtest
 
