@@ -19,8 +19,12 @@ matrix:
         packages: g++-7
 
 before_install:
-- ls && mkdir tools && cd ./tools
-- git clone --depth=1 --quiet https://github.com/Microsoft/vcpkg.git
+- cd ~ && ls
+- mkdir tools && cd ./tools
+- wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" -O ninja-linux.zip
+- unzip ninja-linux.zip -d ninja-v1.8.2
+- export PATH=$PATH:$PWD/ninja-v1.8.2/
+- git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
 - cd vcpkg
 - eval "CC=gcc-7 && CXX=g++-7"
 - ./bootstrap-vcpkg.sh
