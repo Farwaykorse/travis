@@ -8,16 +8,13 @@ git:
 os: linux
 dist: xenial
 
-matrix:
-  include:
-    - env: COMPILER=g++-7 BUILD_TYPE=Debug
-
+compiler: gcc
 
 before_install:
-- eval "CXX=${COMPILER}"
 - mkdir tools || cd ./tools
 - git clone --depth=1 --quiet https://github.com/Microsoft/vcpkg.git
 - cd vcpkg
+- ls -al
 - ./bootstrap-vcpkg.sh
 - ./vcpkg integrate install
 
