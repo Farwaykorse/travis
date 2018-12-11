@@ -36,10 +36,10 @@ before_install:
     eval "CC=gcc-7 && CXX=g++-7"
     ./vcpkg/bootstrap-vcpkg.sh
   fi
-- ./vcpkg/vcpkg integrate install
 
 install:
 # dependencies
+- cd ~/tools/vcpkg
 - vcpkg install ms-gsl
 - vcpkg install gtest
 
