@@ -24,13 +24,13 @@ matrix:
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
-- wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" -O ninja-linux.zip
+- wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
 - unzip ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
 - |
   if [[ -x ./vcpkg/vcpkg ]]; then
     cd ./vcpkg
-    git pull
+    git pull --quiet
   else
     git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
     eval "CC=gcc-7 && CXX=g++-7"
