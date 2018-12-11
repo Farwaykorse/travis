@@ -58,8 +58,6 @@ before_script:
 
 script: true
 
-after_script: true
-
 before_cache:
 - |
   # Cleaning build cache
@@ -69,3 +67,5 @@ before_cache:
 cache:
   directories:
   - ~/tools/vcpkg
+
+after_script: true
