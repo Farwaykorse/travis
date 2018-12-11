@@ -28,9 +28,7 @@ matrix:
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
-- wget -q \
-    "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip"\
-    --tries=3 -nc -O ninja-linux.zip
+- wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
 - |
   sum=$(sha512sum ./ninja-linux.zip)
   if [[ $sum = $env.NINJA_SHA512 ]]; then
@@ -46,8 +44,7 @@ before_install:
     cd ./vcpkg
     git pull --quiet
   else
-    git clone --depth=1 --branch=master --quiet \
-      https://github.com/Microsoft/vcpkg.git
+    git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
     eval "CC=gcc-7 && CXX=g++-7"
     ./vcpkg/bootstrap-vcpkg.sh
   fi
