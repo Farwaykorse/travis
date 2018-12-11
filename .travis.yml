@@ -27,15 +27,15 @@ before_install:
 - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" -O ninja-linux.zip
 - unzip ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
--|
-  if ![[ -x ./vcpkg/vcpkg ]]; then
-    git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
-    eval "CC=gcc-7 && CXX=g++-7"
-    ./vcpkg/bootstrap-vcpkg.sh
-  else
-    cd ./vcpkg
-    git pull
-  fi
+#-|
+#  if ![[ -x ./vcpkg/vcpkg ]]; then
+-    git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
+-    eval "CC=gcc-7 && CXX=g++-7"
+-    ./vcpkg/bootstrap-vcpkg.sh
+#  else
+#    cd ./vcpkg
+#    git pull
+#  fi
 - ./vcpkg/vcpkg integrate install
 
 install:
@@ -43,16 +43,14 @@ install:
 - vcpkg install ms-gsl
 - vcpkg install gtest
 
-
-before_script: true
+before_script:
 - cd $TRAVIS_BUILD_DIR
 
 script: true
 
 after_script: true
 
-before_cache: true
+before_cache:
 # cleaning up cache
 - rm -rf ~/tools/vcpkg/buildtrees
 - rm -rf ~/tools/vcpkg/downloads
-
