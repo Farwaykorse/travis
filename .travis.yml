@@ -14,6 +14,10 @@ dist: xenial
 
 compiler: gcc
 
+env:
+  global:
+  - NINJA_SHA512=xxxx
+
 matrix:
   include:
   - name: GCC
@@ -24,15 +28,26 @@ matrix:
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
-- wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
-- unzip -q ninja-linux.zip -d ninja
+- wget -q \
+    "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip"\
+    --tries=3 -nc -O ninja-linux.zip
+- |
+  sum=$(sha512sum ./ninja-linux.zip)
+  if [[ $sum = $env.NINJA_SHA512 ]]; then
+    unzip -q ninja-linux.zip -d ninja
+  else
+    echo "Ninja hash has changed!"  >&2
+    echo "Expecting: $NINJA_SHA512" >&2
+    echo "Actual:    $sum"          >&2
+  fi
 - export PATH=$PATH:$PWD/ninja/
 - |
   if [[ -x ./vcpkg/vcpkg ]]; then
     cd ./vcpkg
     git pull --quiet
   else
-    git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
+    git clone --depth=1 --branch=master --quiet \
+      https://github.com/Microsoft/vcpkg.git
     eval "CC=gcc-7 && CXX=g++-7"
     ./vcpkg/bootstrap-vcpkg.sh
   fi
