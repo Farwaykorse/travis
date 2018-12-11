@@ -25,7 +25,7 @@ matrix:
 before_install:
 - mkdir -p ~/tools && cd ~/tools
 - wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
-- unzip ninja-linux.zip -d ninja
+- unzip -q ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
 - |
   if [[ -x ./vcpkg/vcpkg ]]; then
