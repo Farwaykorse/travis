@@ -28,13 +28,13 @@ before_install:
 - unzip ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
 -|
-  if [[ ! -x ./vcpkg/vcpkg ]]; then
+  if [[ -x ./vcpkg/vcpkg ]]; then
+    cd ./vcpkg
+    git pull
+  else
     git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
     eval "CC=gcc-7 && CXX=g++-7"
     ./vcpkg/bootstrap-vcpkg.sh
-  else
-    cd ./vcpkg
-    git pull
   fi
 - ./vcpkg/vcpkg integrate install
 
