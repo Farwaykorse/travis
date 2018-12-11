@@ -1,9 +1,5 @@
 language: cpp
 
-cache:
-  directories:
-  - ~/tools/vcpkg
-
 git:
   depth: 1
   quiet: true
@@ -30,6 +26,7 @@ before_install:
 - mkdir -p ~/tools && cd ~/tools
 - wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
 - |
+  # Install Ninja-build
   sum=$(sha512sum ./ninja-linux.zip)
   if [[ $sum = $env.NINJA_SHA512 ]]; then
     unzip -q ninja-linux.zip -d ninja
@@ -40,6 +37,7 @@ before_install:
     echo "Actual:    $sum"          >&2
   fi
 - |
+  # Install vcpkg
   if [[ -x ./vcpkg/vcpkg ]]; then
     cd ./vcpkg
     git pull --quiet
@@ -63,6 +61,11 @@ script: true
 after_script: true
 
 before_cache:
-# cleaning up cache
-- rm -rf ~/tools/vcpkg/buildtrees
-- rm -rf ~/tools/vcpkg/downloads
+- |
+  # Cleaning build cache
+  rm -rf ~/tools/vcpkg/buildtrees
+  rm -rf ~/tools/vcpkg/downloads
+
+cache:
+  directories:
+  - ~/tools/vcpkg
