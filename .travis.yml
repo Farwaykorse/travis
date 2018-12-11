@@ -23,7 +23,7 @@ matrix:
         packages: g++-7
 
 before_install:
-- mkdir ~/tools && cd ~/tools
+- mkdir -p ~/tools && cd ~/tools
 - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" -O ninja-linux.zip
 - unzip ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
