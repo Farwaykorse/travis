@@ -33,12 +33,12 @@ before_install:
   sum=$(sha512sum ./ninja-linux.zip)
   if [[ $sum = $env.NINJA_SHA512 ]]; then
     unzip -q ninja-linux.zip -d ninja
+    export PATH=$PATH:$PWD/ninja/
   else
     echo "Ninja hash has changed!"  >&2
     echo "Expecting: $NINJA_SHA512" >&2
     echo "Actual:    $sum"          >&2
   fi
-- export PATH=$PATH:$PWD/ninja/
 - |
   if [[ -x ./vcpkg/vcpkg ]]; then
     cd ./vcpkg
