@@ -27,7 +27,7 @@ before_install:
 - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" -O ninja-linux.zip
 - unzip ninja-linux.zip -d ninja
 - export PATH=$PATH:$PWD/ninja/
--|
+- |
   if [[ -x ./vcpkg/vcpkg ]]; then
     cd ./vcpkg
     git pull
