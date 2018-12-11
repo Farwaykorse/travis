@@ -40,8 +40,8 @@ before_install:
 install:
 # dependencies
 - cd ~/tools/vcpkg
-- vcpkg install ms-gsl
-- vcpkg install gtest
+- ./vcpkg install ms-gsl
+- ./vcpkg install gtest
 
 before_script:
 - cd $TRAVIS_BUILD_DIR
