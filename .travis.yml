@@ -18,6 +18,13 @@ env:
 # https://github.com/travis-ci/apt-source-safelist/blob/master/ubuntu.json
 # https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test
 
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - libstdc++-7-dev
+
 matrix:
   include:
   - name: GCC-7
