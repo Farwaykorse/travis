@@ -67,6 +67,7 @@ before_install:
     echo "Ninja hash has changed!"  >&2
     echo "Expecting: $NINJA_SHA512" >&2
     echo "Actual:    $sum"          >&2
+    exit 1
   fi
 - |
   # Install vcpkg
