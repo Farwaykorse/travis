@@ -31,7 +31,7 @@ matrix:
         packages:
         - g++-7
   - name: Clang-6.0
-    dist: Xenial
+    dist: xenial
     env:
     - C_compiler=clang-6
     - CXX_compiler=clang++-6
@@ -42,7 +42,7 @@ matrix:
         packages:
         - clang-6.0
   - name: Clang-7
-    dist: Xenial
+    dist: xenial
     env:
     - C_compiler=clang
     - CXX_compiler=clang++
