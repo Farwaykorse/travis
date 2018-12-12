@@ -75,8 +75,13 @@ matrix:
         - libc++abi-7-dev
 
 before_install:
-- eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
 - mkdir -p ~/tools && cd ~/tools
+- |
+  export CC=${C_compiler:-$CC}
+  export CXX=${CXX_compiler:-$CXX}"
+  if [[ ${TRAVIS_OS_NAME} == linux && ${CXX_compiler} == clang* ]]; then
+    export LDFLAGS="-stdlib=libc++"
+  fi
 - |
   { # Download Ninja-build
     os=${TRAVIS_OS_NAME}
