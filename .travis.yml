@@ -23,6 +23,7 @@ matrix:
         - g++-7
         - ninja-build
   - name: Clang-6.0
+    dist: Xenial
     env:
     - C_compiler=clang-6.0
     - CXX_compiler=clang++-6.0
@@ -35,6 +36,7 @@ matrix:
         - lld-6.0
         - ninja-build
   - name: Clang-7
+    dist: Xenial
     env:
     - C_compiler=clang-7
     - CXX_compiler=clang++-7
