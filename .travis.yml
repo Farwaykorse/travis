@@ -23,7 +23,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - libstdc++-7-dev
+    - g++-7
 
 matrix:
   include:
@@ -31,12 +31,6 @@ matrix:
     env:
     - C_compiler=gcc-7
     - CXX_compiler=g++-7
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-7
 
   - name: Clang-6.0
     dist: xenial
@@ -79,13 +73,15 @@ before_install:
     git pull --quiet
   else
     git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
-    eval "CC=${C_compiler} && CXX=${CXX_compiler}"
+    eval "CC=gcc-7 && CXX=g++-7"
     ./vcpkg/bootstrap-vcpkg.sh
   fi
 
 install:
-# dependencies
-- cd ~/tools/vcpkg
+- |
+  # dependencies
+  cd ~/tools/vcpkg
+  eval "CC=${C_compiler} && CXX=${CXX_compiler}"
 - ./vcpkg install ms-gsl
 - ./vcpkg install gtest
 
