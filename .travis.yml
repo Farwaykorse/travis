@@ -8,6 +8,10 @@ git:
 os: linux
 dist: xenial
 
+env:
+  global:
+  - NINJA_SHA512=38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ./ninja-linux.zip
+
 # https://apt.llvm.org
 
 matrix:
@@ -21,7 +25,6 @@ matrix:
         sources: ubuntu-toolchain-r-test
         packages:
         - g++-7
-        - ninja-build
   - name: Clang-6.0
     dist: Xenial
     env:
@@ -33,7 +36,6 @@ matrix:
         - llvm-toolchain-xenial-6.0
         packages:
         - clang-6.0
-        - ninja-build
   - name: Clang-7
     dist: Xenial
     env:
@@ -48,11 +50,21 @@ matrix:
         - lld-7
         - libc++-7-def
         - libc++abi-7-def
-        - ninja-build
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
-- ninja --version
+- wget -q "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip" --tries=3 -nc -O ninja-linux.zip
+- |
+  # Install Ninja-build
+  sum=$(sha512sum ./ninja-linux.zip)
+  if [[ $sum = $env.NINJA_SHA512 ]]; then
+    unzip -q ninja-linux.zip -d ninja
+    export PATH=$PATH:$PWD/ninja/
+  else
+    echo "Ninja hash has changed!"  >&2
+    echo "Expecting: $NINJA_SHA512" >&2
+    echo "Actual:    $sum"          >&2
+  fi
 - |
   # Install vcpkg
   if [[ -x ./vcpkg/vcpkg ]]; then
