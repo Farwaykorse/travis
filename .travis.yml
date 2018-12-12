@@ -48,6 +48,7 @@ matrix:
         - clang-7
         - lld-7
         - libc++-7-def
+        - libc++abi-7-def
         - ninja-build
 
 before_install:
