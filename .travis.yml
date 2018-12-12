@@ -71,9 +71,8 @@ matrix:
         - ubuntu-toolchain-r-test
         packages:
         - g++-7
-        - libc++
-        - libc++abi
-        - lld
+        - libc++-7-dev
+        - libc++abi-7-dev
 
 before_install:
 - eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
