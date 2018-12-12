@@ -33,8 +33,8 @@ matrix:
   - name: Clang-6.0
     dist: Xenial
     env:
-    - C_compiler=clang-6.0
-    - CXX_compiler=clang++-6.0
+    - C_compiler=clang
+    - CXX_compiler=clang++
     addons:
       apt:
         sources:
@@ -44,8 +44,8 @@ matrix:
   - name: Clang-7
     dist: Xenial
     env:
-    - C_compiler=clang-7
-    - CXX_compiler=clang++-7
+    - C_compiler=clang
+    - CXX_compiler=clang++
     addons:
       apt:
         sources:
