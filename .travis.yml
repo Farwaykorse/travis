@@ -67,15 +67,16 @@ before_install:
     fi
   }
 - |
-  # Install vcpkg
-  if [[ -x ./vcpkg/vcpkg ]]; then
-    cd ./vcpkg
-    git pull --quiet
-  else
-    git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
-    eval "CC=gcc-7 && CXX=g++-7"
-    ./vcpkg/bootstrap-vcpkg.sh
-  fi
+  { # Install vcpkg
+    if [[ -x ./vcpkg/vcpkg ]]; then
+      cd ./vcpkg
+      git pull --quiet
+    else
+      git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
+      eval "CC=gcc-7 && CXX=g++-7"
+      ./vcpkg/bootstrap-vcpkg.sh
+    fi
+  }
 
 install:
 - |
