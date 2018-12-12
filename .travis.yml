@@ -34,8 +34,8 @@ matrix:
   - name: Clang-6.0
     dist: xenial
     env:
-    - C_compiler=clang-6
-    - CXX_compiler=clang++-6
+    - C_compiler=clang-6.0
+    - CXX_compiler=clang++-6.0
     addons:
       apt:
         sources:
