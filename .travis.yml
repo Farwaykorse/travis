@@ -11,8 +11,7 @@ dist: xenial
 env:
   global:
   - NINJA_VER=v1.8.2
-  - NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-linux.zip"
-  - NINJA_SHA512='38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ./ninja-linux.zip'
+  - NINJA_SHA512='38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ./ninja.zip'
 
 # https://apt.llvm.org
 # https://github.com/travis-ci/apt-source-safelist/blob/master/ubuntu.json
@@ -71,12 +70,17 @@ matrix:
 before_install:
 - eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
 - mkdir -p ~/tools && cd ~/tools
-- wget -q "${NINJA_URL}" --tries=3 -nc -O ninja-linux.zip
+- |
+  { # Download Ninja-build
+    os=${TRAVIS_OS_NAME}
+    NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-${os}.zip"
+    wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
+  }
 - |
   { # Install Ninja-build
-    sum=$(sha512sum ./ninja-linux.zip)
+    sum=$(sha512sum ./ninja.zip)
     if [[ $sum = ${NINJA_SHA512} ]]; then
-      unzip -q ninja-linux.zip -d ninja
+      unzip -q ninja.zip -d ninja
       export PATH=$PATH:$PWD/ninja/
     else
       echo "Ninja hash has changed!"  >&2
