@@ -60,7 +60,7 @@ before_install:
 - |
   # Install Ninja-build
   sum=$(sha512sum ./ninja-linux.zip)
-  if [[ $sum = $env.NINJA_SHA512 ]]; then
+  if [[ $sum = ${NINJA_SHA512} ]]; then
     unzip -q ninja-linux.zip -d ninja
     export PATH=$PATH:$PWD/ninja/
   else
