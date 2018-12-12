@@ -26,7 +26,8 @@ matrix:
     - CXX_compiler=g++-7
     addons:
       apt:
-        sources: ubuntu-toolchain-r-test
+        sources:
+        - ubuntu-toolchain-r-test
         packages:
         - g++-7
   - name: Clang-6.0
