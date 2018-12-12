@@ -50,10 +50,14 @@ matrix:
       apt:
         sources:
         - llvm-toolchain-xenial-6.0
+        - llvm-toolchain-xenial-7
         - ubuntu-toolchain-r-test
         packages:
         - clang-6.0
         - g++-7
+        - lld-6.0
+        - libc++-7-dev
+        - libc++abi-7-dev
 
   - name: Clang-7
     dist: xenial
@@ -63,9 +67,13 @@ matrix:
     addons:
       apt:
         sources:
+        - llvm-toolchain-xenial-7
         - ubuntu-toolchain-r-test
         packages:
         - g++-7
+        - libc++
+        - libc++abi
+        - lld
 
 before_install:
 - eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
