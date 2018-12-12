@@ -8,14 +8,28 @@ git:
 os: linux
 dist: xenial
 
+# https://apt.llvm.org
+
 matrix:
   include:
   - name: GCC-7
+    env:
+    - C_compiler=gcc-7
+    - CXX_compiler=g++-7
     addons:
       apt:
         sources: ubuntu-toolchain-r-test
         packages:
         - g++-7
+        - ninja-build
+  - name: Clang-6
+    env:
+    - C_compiler=clang-6
+    - CXX_compiler=clang++-6
+    addons:
+      apt:
+        sources:
+        - llvm-toolchain-xenial-6.0
         - ninja-build
 
 before_install:
@@ -28,7 +42,7 @@ before_install:
     git pull --quiet
   else
     git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
-    eval "CC=gcc-7 && CXX=g++-7"
+    eval "CC=${C_compiler} && CXX=${CXX_compiler}"
     ./vcpkg/bootstrap-vcpkg.sh
   fi
 
