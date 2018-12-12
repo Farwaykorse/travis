@@ -22,10 +22,10 @@ matrix:
         packages:
         - g++-7
         - ninja-build
-  - name: Clang-6
+  - name: Clang-6.0
     env:
-    - C_compiler=clang-6
-    - CXX_compiler=clang++-6
+    - C_compiler=clang-6.0
+    - CXX_compiler=clang++-6.0
     addons:
       apt:
         sources:
@@ -34,7 +34,19 @@ matrix:
         - clang-6.0
         - lld-6.0
         - ninja-build
-
+  - name: Clang-7
+    env:
+    - C_compiler=clang-7
+    - CXX_compiler=clang++-7
+    addons:
+      apt:
+        sources:
+        - llvm-toolchain-xenial-7
+        packages:
+        - clang-7
+        - lld-7
+        - libc++-7-def
+        - ninja-build
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
