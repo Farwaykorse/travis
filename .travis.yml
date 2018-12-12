@@ -8,19 +8,15 @@ git:
 os: linux
 dist: xenial
 
-compiler: gcc
-
-addons:
-  apt:
-    packages: ninja-build
-
 matrix:
   include:
-  - name: GCC
+  - name: GCC-7
     addons:
       apt:
         sources: ubuntu-toolchain-r-test
-        packages: g++-7
+        packages:
+        - g++-7
+        - ninja-build
 
 before_install:
 - mkdir -p ~/tools && cd ~/tools
