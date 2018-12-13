@@ -84,7 +84,7 @@ matrix:
         - libc++abi-7-dev
 
   allow_failures:
-  -name: Clang-7 libc++
+  - name: Clang-7 libc++
 
 before_install:
 - mkdir -p ~/tools
