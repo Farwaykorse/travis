@@ -81,6 +81,16 @@ before_install:
 - |
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
 - |
+  # using libc++
+  if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
+    FLAGS="-stdlib=${CXX_lib}"
+    if [[ ${CXX_lib} == libc++ ]]; then
+      FLAGS="${FLAGS} -lc++fs"
+    #  FLAGS="${FLAGS} -lc++experimental"
+    fi
+    export CXXFLAGS=$FLAGS
+  fi
+- |
   { # Download Ninja-build
     os=${TRAVIS_OS_NAME}
     NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-${os}.zip"
@@ -106,23 +116,13 @@ before_install:
       git pull --quiet
     else
       git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
-      if [[ ${TRAVIS_OS_NAME} == linux && ${CXX_compiler} != g++* || ${CXX_compiler%g++-} < 7 ]]
-      then
-        eval "CC=gcc-7 && CXX=g++-7"
-      fi
+      #if [[ ${TRAVIS_OS_NAME} == linux && ${CXX_compiler} != g++* || ${CXX_compiler%g++-} < 7 ]]
+      #then
+      #  eval "CC=gcc-7 && CXX=g++-7"
+      #fi
       ./vcpkg/bootstrap-vcpkg.sh
     fi
   }
-- |
-  # using libc++
-  if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
-    FLAGS="-stdlib=${CXX_lib}"
-    #if [[ ${CXX_lib} == libc++ ]]; then
-    #  FLAGS="${FLAGS} -lc++fs"
-    #  FLAGS="${FLAGS} -lc++experimental"
-    #fi
-    export CXXFLAGS=$FLAGS
-  fi
 
 install:
 - |
