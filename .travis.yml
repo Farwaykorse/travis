@@ -1,7 +1,6 @@
 language: cpp
 
 git:
-  depth: 1
   quiet: true
 
 # Defaults
