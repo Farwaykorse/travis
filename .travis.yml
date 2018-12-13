@@ -81,7 +81,7 @@ before_install:
 - |
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
   if [[ ${CXX_lib} ]]; then
-    export LDFLAGS="-stdlib=${CXX_lib}"
+    export CXXFLAGS="-stdlib=${CXX_lib}"
   fi
 - |
   { # Download Ninja-build
