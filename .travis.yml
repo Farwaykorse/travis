@@ -10,9 +10,9 @@ git:
 
 env:
   global:
-  - NINJA_VER=v1.8.2
-  - NINJA_SHA512='38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ninja-linux.zip'
-  - TOOLCHAIN_FILE="$HOME/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
+  - NINJA_VER: v1.8.2
+  - NINJA_SHA512: '38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ninja-linux.zip'
+  - TOOLCHAIN_FILE: "$HOME/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 ##====--------------------------------------------------------------------====##
 ## Define Build Configurations
@@ -24,8 +24,8 @@ matrix:
   include:
   - name: GCC-7
     env:
-    - C_compiler=gcc-7
-    - CXX_compiler=g++-7
+    - C_compiler:   gcc-7
+    - CXX_compiler: g++-7
     addons:
       apt:
         sources:
@@ -35,8 +35,8 @@ matrix:
 
   - name: GCC-8
     env:
-    - C_compiler=gcc-8
-    - CXX_compiler=g++-8
+    - C_compiler:   gcc-8
+    - CXX_compiler: g++-8
     addons:
       apt:
         sources:
@@ -47,8 +47,8 @@ matrix:
   - name: Clang-6.0
     dist: xenial
     env:
-    - C_compiler=clang-6.0
-    - CXX_compiler=clang++-6.0
+    - C_compiler: clang-6.0
+    - CXX_compiler: clang++-6.0
     addons:
       apt:
         sources:
@@ -62,8 +62,8 @@ matrix:
   - name: Clang-6.0 libc++
     dist: xenial
     env:
-    - C_compiler=clang-6.0
-    - CXX_compiler=clang++-6.0
+    - C_compiler: clang-6.0
+    - CXX_compiler: clang++-6.0
     - CXX_lib=libc++
     addons:
       apt:
@@ -81,8 +81,8 @@ matrix:
   - name: Clang-7
     dist: xenial
     env:
-    - C_compiler=clang
-    - CXX_compiler=clang++
+    - C_compiler:   clang
+    - CXX_compiler: clang++
     addons:
       apt:
         sources:
@@ -93,9 +93,9 @@ matrix:
   - name: Clang-7 libc++
     dist: xenial
     env:
-    - C_compiler=clang
-    - CXX_compiler=clang++
-    - CXX_lib=libc++
+    - C_compiler:   clang
+    - CXX_compiler: clang++
+    - CXX_lib: libc++
     addons:
       apt:
         sources:
