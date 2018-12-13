@@ -29,63 +29,6 @@ matrix:
         packages:
         - g++-7
 
-  - name: GCC-8
-    env:
-    - C_compiler=gcc-8
-    - CXX_compiler=g++-8
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-8
-
-  - name: Clang-6.0
-    dist: xenial
-    env:
-    - C_compiler=clang-6.0
-    - CXX_compiler=clang++-6.0
-    addons:
-      apt:
-        sources:
-        - llvm-toolchain-xenial-6.0
-        - ubuntu-toolchain-r-test
-        packages:
-        - clang-6.0
-        - g++-7
-        - lld-6.0
-
-  - name: Clang-7
-    dist: xenial
-    env:
-    - C_compiler=clang
-    - CXX_compiler=clang++
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-7
-
-  - name: Clang-7 libc++
-    dist: xenial
-    env:
-    - C_compiler=clang
-    - CXX_compiler=clang++
-    - CXX_lib=libc++
-    addons:
-      apt:
-        sources:
-        - llvm-toolchain-xenial-7
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-7
-        - libc++-7-dev
-        - libc++abi-7-dev
-
-  allow_failures:
-  -name: Clang-7 libc++
-
 before_install:
 - mkdir -p ~/tools
 - |
@@ -100,7 +43,7 @@ before_install:
     wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
     sum=$(sha512sum ./ninja.zip)
     if [[ $sum = ${NINJA_SHA512} ]]; then
-      unzip -q ninja.zip -d ninja
+      unzip -q ninja.zipX -d ninja
     else
       echo "Ninja hash has changed!"  >&2
       echo "Expecting: $NINJA_SHA512" >&2
@@ -124,6 +67,9 @@ before_install:
       ./vcpkg/bootstrap-vcpkg.sh
     fi
   }
+- |
+  shouldbeignored
+  exit 0
 - |
   # using libc++
   if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
