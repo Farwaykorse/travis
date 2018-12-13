@@ -110,9 +110,6 @@ before_install:
   )
   export PATH=$PATH:$HOME/tools/ninja/
 - |
-  failsalways
-  exit 0
-- |
   { # Install vcpkg
     set -ev
     if [[ -x ./vcpkg/vcpkg ]]; then
