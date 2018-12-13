@@ -12,6 +12,7 @@ env:
   global:
   - NINJA_VER=v1.8.2
   - NINJA_SHA512='38fcb68e745c1f15b4b50f20069ffe686b1ef5baf93b74958e132ea5d30d155cf6970d6dc1b095aafd421ebd8bcc63acf4f64e305c496266b5182f99b815cca5  ninja-linux.zip'
+  - TOOLCHAIN_FILE="$HOME/tools/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
 ##====--------------------------------------------------------------------====##
 ## Define Build Configurations
@@ -178,6 +179,7 @@ script:
 - cmake --version
 - ninja --version
 - ~/tools/vcpkg/vcpkg list
+- if [[ ! -e ${TOOLCHAIN_FILE:?} ]]; then exit 1; fi
 
 ##====--------------------------------------------------------------------====##
 before_cache:
