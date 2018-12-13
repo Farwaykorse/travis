@@ -111,7 +111,7 @@ before_install:
   )
   export PATH=$PATH:$HOME/tools/ninja/
 - |
-  { # Install vcpkg
+  ( # Install vcpkg
     cd ~/tools
     if [[ -x ./vcpkg/vcpkg ]]; then
       cd ./vcpkg
@@ -124,7 +124,7 @@ before_install:
       fi
       ./vcpkg/bootstrap-vcpkg.sh
     fi
-  }
+  )
 - |
   # using libc++
   if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
