@@ -92,8 +92,8 @@ before_install:
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
 - |
   # Install Ninja-build
-  set -ev
   (
+    set -e
     os=${TRAVIS_OS_NAME}
     file_name="ninja-${os}.zip"
     NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/${file_name}"
@@ -111,7 +111,7 @@ before_install:
   export PATH=$PATH:$HOME/tools/ninja/
 - |
   { # Install vcpkg
-    set -ev
+    set -e
     if [[ -x ./vcpkg/vcpkg ]]; then
       cd ~/tools/vcpkg
       git pull --quiet
