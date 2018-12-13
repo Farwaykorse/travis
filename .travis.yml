@@ -93,7 +93,7 @@ before_install:
 - |
   { # Install Ninja-build
     os=${TRAVIS_OS_NAME}
-    NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-${os}.zip_wrong"
+    NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-${os}.zip"
     wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
     sum=$(sha512sum ./ninja.zip)
     if [[ $sum = ${NINJA_SHA512} ]]; then
