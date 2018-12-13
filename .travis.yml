@@ -109,6 +109,7 @@ before_install:
   }
 - |
   { # Install vcpkg
+    set -ev
     if [[ -x ./vcpkg/vcpkg ]]; then
       cd ./vcpkg
       git pull --quiet
