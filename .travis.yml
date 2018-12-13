@@ -88,6 +88,7 @@ matrix:
 
 before_install:
 - |
+  # Setup
   set -e # stop Bash execution on error
   mkdir -p ~/tools
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
@@ -111,7 +112,8 @@ before_install:
   )
   export PATH=$PATH:$HOME/tools/ninja/
 - |
-  ( # Install vcpkg
+  # Install vcpkg
+  (
     cd ~/tools
     if [[ -x ./vcpkg/vcpkg ]]; then
       cd ./vcpkg
@@ -126,7 +128,7 @@ before_install:
     fi
   )
 - |
-  # using libc++
+  # Using libc++
   if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
     FLAGS="-stdlib=${CXX_lib}"
     #if [[ ${CXX_lib} == libc++ ]]; then
@@ -137,9 +139,8 @@ before_install:
   fi
 
 install:
-- |
   # dependencies
-  cd ~/tools/vcpkg
+- cd ~/tools/vcpkg
 - ./vcpkg install ms-gsl
 - ./vcpkg install gtest
 
