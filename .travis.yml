@@ -55,6 +55,25 @@ matrix:
         - g++-7
         - lld-6.0
 
+  - name: Clang-6.0 libc++
+    dist: xenial
+    env:
+    - C_compiler=clang-6.0
+    - CXX_compiler=clang++-6.0
+    - CXX_lib=libc++
+    addons:
+      apt:
+        sources:
+        - llvm-toolchain-xenial-6.0
+        - llvm-toolchain-xenial-7
+        - ubuntu-toolchain-r-test
+        packages:
+        - clang-6.0
+        - g++-7
+        - libc++-7-dev
+        - libc++abi-7-dev
+        - lld-6.0
+
   - name: Clang-7
     dist: xenial
     env:
@@ -84,6 +103,7 @@ matrix:
         - libc++abi-7-dev
 
   allow_failures:
+  - name: Clang-6.0 libc++
   - name: Clang-7 libc++
 
 before_install:
