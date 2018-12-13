@@ -46,6 +46,7 @@ matrix:
     env:
     - C_compiler=clang-6.0
     - CXX_compiler=clang++-6.0
+    - CXX_lib=libc++
     addons:
       apt:
         sources:
@@ -64,6 +65,7 @@ matrix:
     env:
     - C_compiler=clang
     - CXX_compiler=clang++
+    - CXX_lib=libc++
     addons:
       apt:
         sources:
@@ -77,10 +79,9 @@ matrix:
 before_install:
 - mkdir -p ~/tools && cd ~/tools
 - |
-  export CC=${C_compiler:-$CC}
-  export CXX=${CXX_compiler:-$CXX}"
-  if [[ ${TRAVIS_OS_NAME} == linux && ${CXX_compiler} == clang* ]]; then
-    export LDFLAGS="-stdlib=libc++"
+  eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
+  if [[ ${CXX_lib} ]]; then
+    export LDFLAGS="-stdlib=${CXX_lib}"
   fi
 - |
   { # Download Ninja-build
