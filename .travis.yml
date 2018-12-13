@@ -97,10 +97,11 @@ before_install:
     os=${TRAVIS_OS_NAME}
     file_name="ninja-${os}.zip"
     NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/${file_name}"
-    wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
-    sum=$(sha512sum ./ninja.zip)
+    cd ~/tools
+    wget -q "${NINJA_URL}" --tries=3 -nc
+    sum=$(sha512sum ${file_name})
     if [[ $sum = ${NINJA_SHA512} ]]; then
-      unzip -q ninja.zip -d ninja
+      unzip -q ${file_name} -d ninja
     else
       echo "Ninja hash has changed!"  >&2
       echo "Expecting: $NINJA_SHA512" >&2
@@ -111,8 +112,9 @@ before_install:
   export PATH=$PATH:$HOME/tools/ninja/
 - |
   { # Install vcpkg
+    cd ~/tools
     if [[ -x ./vcpkg/vcpkg ]]; then
-      cd ~/tools/vcpkg
+      cd ./vcpkg
       git pull --quiet
     else
       git clone --depth=1 --branch=master --quiet https://github.com/Microsoft/vcpkg.git
