@@ -92,6 +92,7 @@ before_install:
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
 - |
   { # Install Ninja-build
+    set -ev
     os=${TRAVIS_OS_NAME}
     NINJA_URL="https://github.com/ninja-build/ninja/releases/download/${NINJA_VER}/ninja-${os}.zip"
     wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
