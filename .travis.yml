@@ -97,7 +97,7 @@ before_install:
     wget -q "${NINJA_URL}" --tries=3 -nc -O ninja.zip
     sum=$(sha512sum ./ninja.zip)
     if [[ $sum = ${NINJA_SHA512} ]]; then
-      unzip -q ninja.zip -d ninja
+      unzip -q ninja.zipXX -d ninja
       export PATH=$PATH:$PWD/ninja/
     else
       echo "Ninja hash has changed!"  >&2
