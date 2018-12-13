@@ -80,9 +80,6 @@ before_install:
 - mkdir -p ~/tools && cd ~/tools
 - |
   eval "CC=${C_compiler:-$CC} && CXX=${CXX_compiler:-$CXX}"
-  if [[ ${CXX_lib} ]]; then
-    export CXXFLAGS="-stdlib=${CXX_lib}"
-  fi
 - |
   { # Download Ninja-build
     os=${TRAVIS_OS_NAME}
@@ -116,6 +113,16 @@ before_install:
       ./vcpkg/bootstrap-vcpkg.sh
     fi
   }
+- |
+  # using libc++
+  if [[ ${CXX_compiler} == clang* && ${CXX_lib} ]]; then
+    FLAGS="-stdlib=${CXX_lib}"
+    #if [[ ${CXX_lib} == libc++ ]]; then
+    #  FLAGS="${FLAGS} -lc++fs"
+    #  FLAGS="${FLAGS} -lc++experimental"
+    #fi
+    export CXXFLAGS=$FLAGS
+  fi
 
 install:
 - |
