@@ -171,9 +171,13 @@ install:
 ##====--------------------------------------------------------------------====##
 before_script:
 - cd $TRAVIS_BUILD_DIR
-- echo $CXX
 
-script: true
+script:
+- echo $CXX
+- $CXX --version
+- cmake --version
+- ninja --version
+- ~/tools/vcpkg/vcpkg list
 
 ##====--------------------------------------------------------------------====##
 before_cache:
